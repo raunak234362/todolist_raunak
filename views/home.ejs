@@ -1,59 +1,66 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font-family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- font awesome link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-    <link rel="stylesheet" href="./assets/style.css" </head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- style-link -->
+    <link rel="stylesheet" href="./style.css">
+    
     <script src=" https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+    <title>ToDoList</title>
+</head>
 <body>
     <section class="container">
-        <h1 align="center">TODO APP</h1>
-
-        <!-- form to create task -->
+        <center>
+        <h1 align="center">TODO App</h1>
+        </center>
         <form action="/create-task" method="POST">
 
-            <table class="table">
-                <thead>
-                    <tr class="table-active">
-                        <th>Add Task</th>
-                        <th>category</th>
-                        <th>date</th>
-                        <th></th>
-                    </tr>
-                </thead>
+            
+            <table>
+            <tr colspan="2">
+                <td>
+                    <label for="description">Description</label>
+                    <input type="text" name="description" id="description" placeholder="What do you need to do?" required>
+                </td>
+            </tr>
+            <tr class="cat-date">
+                <td class="category-cell">
+                    <label for="category">Category</label>
+                    <select name="category" required>
+                        <option>Personal</option>
+                        <option>Work</option>
+                        <option>School</option>
+                        <option>Cleaning</option>
+                        <option>Other</option>
+                    </select>
+                </td>
 
-
-                <tbody>
-                    <tr>
-                        <td> <input type="text" name="description" placeholder="What do you need to do?"
-                                required></input></th>
-                        <td> <select name="category" required>
-
-                                <option>PERSONAL</option>
-                                <option>WORK</option>
-                                <option>SCHOOL</option>
-                                <option>CLEANING</option>
-                                <option>OTHER</option>
-
-                            </select></th>
-                        <td> <input type="date" name="date" required></th>
-                        <td><input type="submit" class="btn btn-success" id="add" value="ADD TASK"></th>
-                    </tr>
-                </tbody>
-
+                <td class="right"">
+                    <label for="date">Date</label>
+                    <input type="date" name="date" required>
+                </td>
+            </tr>
             </table>
-
+            <div class="button" align="center">
+                <input type="submit" class="btn btn-success" id="add" value="ADD TASK">
+            </div>
         </form>
-    </section>
-    <div>
-        <h1 align="center">TASKS LIST</h1>
 
+        <br>
+
+        <center>
+        <h1 align="center">TASKS LIST</h1>
+        </center>
         <form action="/delete-task" method="GET">
             <table class="table">
                 <thead>
@@ -61,12 +68,10 @@
                         <th>Select</th>
                         <th>Task</th>
                         <th>Category</th>
-                        <th>due date</th>
+                        <th>Due date</th>
                     </tr>
                 </thead>
                 <% for(let i of task) { %>
-
-
                     <tr>
 
                         <td> <input type="checkbox" name="<%= i._id %>"></td>
@@ -74,8 +79,8 @@
                             <p id="task-description">
                                 <%= i.description %>
                         </td>
-                        <td>
-                            <p id="task-category"></p>: <%= i.category %>
+                        <td class="category-cell <%= i.category.toLowerCase() %>">
+                            <p id="task-category"><%= i.category %></p>
                         </td>
                         <td>
                             <p id="due-date">: <%= i.date %>
@@ -85,17 +90,9 @@
 
 
                     <% } %>
-
-
-
-
             </table>
-            <div align="center"><input type="submit" class="btn btn-danger" value="DELETE TASK">
-            </div>>
+                <div class="delete-button" align="center"><input type="submit" class="btn btn-danger" value="DELETE TASK"></div>
         </form>
-
-
-    </div>
+    </section>
 </body>
-
 </html>
